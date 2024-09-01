@@ -183,7 +183,7 @@ Not all of it is relevant now, but it is essential to check whether your name an
 
 ## Troubleshooting
 
-If you are having issues with the setup please start a discussion on GitHub [here](https://github.com/ateucher/pkg-dev-psc-2024-04-29/discussions).
+If you are having issues with the setup please start a discussion on GitHub [here](https://github.com/ateucher/pkg-dev-dfo-2024-11/discussions).
 
 ### References
 

@@ -16,9 +16,9 @@ You will learn the structure of a package, how to organize your code, and workfl
 You will learn how to write good documentation so that users can learn how to use your package, and how to use automated testing to ensure it is functioning the way you expect it to, now and into the future.
 You will also learn how to check your package for common problems, and how to distribute your package for others to use.
 
-This will be an interactive 1-day workshop, and we will be using the RStudio IDE to work through the materials, as it has been designed to work well with the development practices we will be featuring.
+This will be an interactive workshop, and we will be using the RStudio IDE to work through the materials, as it has been designed to work well with the development practices we will be featuring.
 
-\*\*This workshop is for you if you...\*
+**This workshop is for you if you...**
 
 1.  have written several R scripts and find yourself wondering how to reuse or share the code you've written.
 2.  know how to write functions in R.
@@ -26,7 +26,7 @@ This will be an interactive 1-day workshop, and we will be using the RStudio IDE
 
 ## Prework
 
-Please ensure you have installed a recent version of R (\>= 4.0) and are able to install packages.
+Please ensure you have installed a recent version of R (\>= 4.3) and are able to install packages.
 The workshop will be taught using the RStudio IDE. You are welcome to use whichever IDE you are comfortable with, but you will find it easier to follow along if you are using RStudio as well.
 
 ### Git and GitHub
@@ -43,15 +43,7 @@ Please note that all participants and contributors must abide by the [Code of Co
 
 ## Schedule
 
-| Time          | Activity                                                      |
-|:--------------|:--------------------------------------------------------------|
-| 09:00 - 10:30 | What is a package? Package Structure and State                |
-| 10:30 - 11:00 | *Coffee break*                                                |
-| 11:00 - 12:30 | Package Creation and Metadata; Documentation                  |
-| 12:30 - 13:30 | *Lunch break*                                                 |
-| 13:30 - 15:00 | Testing; Dependencies                                         |
-| 15:00 - 15:30 | *Coffee break*                                                |
-| 15:30 - 17:00 | Continuous Integration; Package Website; Package Distribution |
+TBD
 
 ## Instructors
 

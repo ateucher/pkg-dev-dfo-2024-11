@@ -1,5 +1,5 @@
 Package: pkg-dev-workshop
-Title: Material for 1-Day Package Development Workshop
+Title: Material for 2-Day Package Development Workshop
 Version: 0.0.0.9000
 Authors@R: 
     person("Andy", "Teucher", , "andy.teucher@gmail.com", role = c("aut", "cre"),
