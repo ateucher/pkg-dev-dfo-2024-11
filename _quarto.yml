@@ -29,10 +29,12 @@ website:
       - setup.qmd
       - understanding-pkgs.qmd
       - create-pkg-and-metadata.qmd
-      - documentation.qmd
       - testing.qmd
-      - dependencies.qmd
-      - ci.qmd
+      - dependencies_and_ci.qmd
+      - documentation.qmd
+      - website.qmd
+      - using-the-tidyverse.qmd
+      - design.qmd
       - share.qmd
       
 bibliography: references.bib

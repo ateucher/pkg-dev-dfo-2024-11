@@ -1,0 +1,9 @@
+---
+title: Using the tidyverse in your package 🧹
+---
+
+
+
+```{r}
+library(dplyr)
+```
