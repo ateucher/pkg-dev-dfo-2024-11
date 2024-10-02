@@ -14,8 +14,8 @@ You will need:
 -   [R package development toolchain](#install-r-package-development-tools)
 -   [Several R packages](#packages)
 -   [Git]
--   [GitLab account](#gitlab)
--   [GitLab linked to R](#check-link-between-r-and-gitlab)
+-   [GitHub account](#github)
+-   [GitHub linked to R](#check-link-between-r-and-github)
 
 ## Install R and RStudio {#install-r-and-rstudio}
 
@@ -115,13 +115,13 @@ See [brew.sh](https://brew.sh/) for installation instructions.
 To install Git using Homebrew, run the following in the Terminal: `brew install git`
 :::
 
-## GitLab {#gitlab}
+## GitHub {#github}
 
-Register a GitLab account at [gitlab.com](https://gitlab.com/).
+Register a GitHub account at [github.com](https://github.com/).
 
-We highly recommend the book [Happy Git with R](https://happygitwithr.com/) for advice on setting up and using Git with R [@bryan].
+I highly recommend the book [Happy Git with R](https://happygitwithr.com/) for advice on setting up and using Git with R [@bryan].
 
-## Check link between R and GitLab {#check-link-between-r-and-gitlab}
+## Check link between R and GitHub {#check-link-between-r-and-github}
 
 Configure your `user.name` and `user.email` for git in RStudio with:
 
@@ -129,22 +129,24 @@ Configure your `user.name` and `user.email` for git in RStudio with:
 #| eval: false
 usethis::use_git_config(
   user.name = "Jane Doe",          # actual first and last name
-  user.email = "jane@example.com"  # email associated with GitLab account
+  user.email = "jane@example.com"  # email associated with GitHub account
   )
 ```
 
-Communicating with GitLab requires authentication with your GitLAb account.
+Communicating with GitHub requires authentication with your GitHub account.
 This is achieved by creating and securely storing a Personal Access Token (PAT).
-Although focused more on GitHub, the [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** [@usethis] package has details on using PATs, but for now the following should suffice.
+The [Managing Git(Hub) Credentials](https://usethis.r-lib.org/articles/articles/git-credentials.html) vignette in the **`usethis`** [@usethis] package has details on using PATs, but for now the following should suffice.
 
-Create a PAT using these instructions:
+Create a PAT with:
 
-<https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token>
+```{r}
+#| eval: false
+usethis::create_github_token()
+```
 
-We suggest the following scopes for this token: api, read_api, read_user, create_runner, read_repository, write_repository.
-
+-   Give the token a descriptive name, accept the default scopes, and click "Generate Token".
 -   Copy the newly generated PAT to your clipboard.
--   Run `gitcreds::gitcreds_set("https://gitlab.com")` in R and paste in your PAT when prompted.
+-   Run `gitcreds::gitcreds_set()` in R and paste in your PAT when prompted.
 -   After you close the PAT webpage, you won't be able to see your PAT again! You can store it somewhere secure, such as in a password manager.
 
 ### Caveat about storing PATs on Linux:
@@ -174,12 +176,24 @@ usethis::git_sitrep()
 • Default Git protocol: 'https'
 • Default initial branch name: 'main'
 
-── GitHub project 
-ℹ Project does not use GitHub
+── GitHub user 
+• Default GitHub host: 'https://github.com'
+• Personal access token for 'https://github.com': '<discovered>'
+• GitHub user: 'ateucher'
+• Token scopes: 'gist, repo, user, workflow'
+• Email(s): 'andy.teucher@gmail.com (primary)'
+ℹ No active usethis project
 ```
 :::
 
-Not all of it is relevant now, but it is essential to check whether your name and email are correct.
+The output shows information about the link between RStudio and GitHub.
+Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as "discovered":
+
+::: cell-output
+```         
+Personal access token for 'https://github.com': '<discovered>'
+```
+:::
 
 ## Troubleshooting
 
