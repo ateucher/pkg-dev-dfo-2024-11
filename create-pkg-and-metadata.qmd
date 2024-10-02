@@ -127,21 +127,9 @@ Description: Provides functions for learning about your R libraries, and the
 check()
 ```
 
-### Use GitLab
-
--   Make an empty repo on GitLab named `libminer`: <https://docs.gitlab.com/ee/user/project/>
--   Choose `empty project`
--   Choose Public or Private
--   Uncheck "Initialize repository with a README"
--   Click "Create Project"
--   Scroll down to "Push an existing folder" section
--   Find the line that says `git remote add origin https:://gitlab...` and copy it to your clipboard.
--   Navigate to the Terminal in RStudio and paste the following commands
-
-#### Tell your git repository where its corresponding repository on GitLab is
-
-```{bash}
-git remote add origin https://gitlab.com/{your-git-lab-username}/{your-repo-name}
+### Use GitHub
+```{r}
+use_github()
 ```
 
 #### Push all your committed code to that repository

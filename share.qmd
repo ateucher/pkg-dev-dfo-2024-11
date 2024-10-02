@@ -11,5 +11,5 @@ use_news_md()
 ## To install your package:
 
 ```{r}
-install_gitlab("{your_gitlab_username}/libminer")
+install_github("{your_github_username}/libminer")
 ```
