@@ -18,7 +18,7 @@ You will also learn how to check your package for common problems, and how to di
 
 This will be an interactive workshop, and we will be using the RStudio IDE to work through the materials, as it has been designed to work well with the development practices we will be featuring.
 
-**This workshop is for you if...**
+**This workshop is for you if you...**
 
 1.  have written several R scripts and find yourself wondering how to reuse or share the code you've written.
 2.  know how to write functions in R.
