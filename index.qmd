@@ -1,5 +1,8 @@
 ---
 title: "Fundamentals of R Package Development"
+execute:
+    eval: true
+    echo: false
 ---
 
 🗓️ November 4-6, 2024 ⏱️ 08:00 - 12:30 PST / 12:00 - 16:30 EST\
@@ -32,7 +35,13 @@ Please ensure you have completed the steps in [System Setup](setup.html)
 
 ## Schedule
 
-TBD
+```{r}
+library(readr)
+library(gt)
+schedule <- read_csv("data/schedule.csv", col_types = "Dccc")
+
+gt(schedule, groupname_col = "Date", rowname_col = "Time (PST)")
+```
 
 ## Instructors
 
@@ -51,3 +60,4 @@ During that time, Sam developed several packages to facilitate reproducible rese
 ------------------------------------------------------------------------
 
 ![](https://i.creativecommons.org/l/by/4.0/88x31.png) This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+http://andyteucher.ca/pkg-dev-psc-2024-11/

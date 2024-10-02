@@ -1,5 +1,8 @@
 ---
 title: "Introduction ✨ "
+execute:
+    eval: true
+    echo: false
 ---
 
 ## What the course will look like
@@ -28,16 +31,13 @@ We are committed to providing a professional, friendly and safe environment for 
 
 ### Schedule
 
-| Time          | Activity                                                      |
-|:--------------|:--------------------------------------------------------------|
-| 09:00 - 10:30 | What is a package? Package Structure and State                |
-| 10:30 - 11:00 | *Coffee break*                                                |
-| 11:00 - 12:30 | Package Creation and Metadata; Documentation                  |
-| 12:30 - 13:30 | *Lunch break*                                                 |
-| 13:30 - 15:00 | Testing; Dependencies                                         |
-| 15:00 - 15:30 | *Coffee break*                                                |
-| 15:30 - 17:00 | Continuous Integration; Package Distribution |
+```{r}
+library(readr)
+library(gt)
+schedule <- read_csv("data/schedule.csv", col_types = "Dccc")
 
+gt(schedule, groupname_col = "Date", rowname_col = "Time (PST)")
+```
 
 ### References
 
