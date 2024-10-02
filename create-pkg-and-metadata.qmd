@@ -134,7 +134,7 @@ use_github()
 
 #### Push all your committed code to that repository
 
-At this step you may be required to enter in your GitLab username and password.
+At this step you may be required to enter in your GitHub username and password.
 
 ```{bash}
 git push --set-upstream origin main

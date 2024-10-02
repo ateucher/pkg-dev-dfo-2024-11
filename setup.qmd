@@ -84,7 +84,7 @@ devtools::has_devel()
 
 ## Git
 
-We will be demonstrating the use of Git and GitLab for tracking changes during package development, and sharing and collaborating on our package.
+We will be demonstrating the use of Git and GitHub for tracking changes during package development, and sharing and collaborating on our package.
 It is not strictly necessary for the workshop, but you will benefit greatly by using it.
 
 ### Windows

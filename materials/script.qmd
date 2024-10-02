@@ -135,21 +135,21 @@ check()
 
 ***back to slides***
 
-#### Tell your git repository where its corresponding repository on GitLab is
+#### Tell your git repository where its corresponding repository on GitHub is
 
 ```{bash}
-git remote add origin https://gitlab.com/boshek/foo.git
+git remote add origin https://GitHub.com/boshek/foo.git
 ```
 
 #### Push all your committed code to that repository
 
-At this step you may be required to enter in your GitLab username and password.
+At this step you may be required to enter in your GitHub username and password.
 
 ```{bash}
 git push --set-upstream origin main
 ```
 
-Go to GitLab page, explore show clone of local
+Go to GitHub page, explore show clone of local
 
 ***back to slides***
 
@@ -460,11 +460,11 @@ package created as a part of a workshop and not meant for serious use.
 
 ## Installation
 
-You can install the development version of libminer from [GitLab](https://gitlab.com/) with:
+You can install the development version of libminer from [GitHub](https://GitHub.com/) with:
 
 ```r
 # install.packages("devtools")
-devtools::install_gitlab("ateucher/libminer")
+devtools::install_GitHub("ateucher/libminer")
 ```
 
 ## Example usage
@@ -497,7 +497,7 @@ install()
 ## Continuous Integration
 
 ```{r}
-use_gitlab_ci()
+use_guthub_actions()
 ```
 
 **commit and push**
