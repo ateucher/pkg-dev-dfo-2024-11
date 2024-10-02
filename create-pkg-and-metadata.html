@@ -149,20 +149,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Package Creation and Metadata 🧰</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./documentation.html">
- <span class="dropdown-text">Documentation 📓</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./testing.html">
  <span class="dropdown-text">Tests 🧪</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./dependencies.html">
- <span class="dropdown-text">Managing dependencies 🐕</span></a>
+    <a class="dropdown-item" href="./dependencies_and_ci.html">
+ <span class="dropdown-text">Managing dependencies and Continuous Integration 🐕</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./ci.html">
- <span class="dropdown-text">Automated checking with GitLab 🦾</span></a>
+    <a class="dropdown-item" href="./documentation.html">
+ <span class="dropdown-text">Documentation 📓</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./website.html">
+ <span class="dropdown-text">Create a package website 🕸</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./using-the-tidyverse.html">
+ <span class="dropdown-text">Using the tidyverse in your package 🧹</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./design.html">
+ <span class="dropdown-text">Design Principles 🧑‍🎨</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./share.html">
@@ -239,26 +247,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documentation 📓</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tests 🧪</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependencies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Managing dependencies 🐕</span></a>
+  <a href="./dependencies_and_ci.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Managing dependencies and Continuous Integration 🐕</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ci.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Automated checking with GitLab 🦾</span></a>
+  <a href="./documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation 📓</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create a package website 🕸</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./using-the-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the tidyverse in your package 🧹</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Design Principles 🧑‍🎨</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -294,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#set-a-license" id="toc-set-a-license" class="nav-link" data-scroll-target="#set-a-license">Set a license</a></li>
   <li><a href="#description-file" id="toc-description-file" class="nav-link" data-scroll-target="#description-file">DESCRIPTION file:</a></li>
   <li><a href="#check-again" id="toc-check-again" class="nav-link" data-scroll-target="#check-again">Check again</a></li>
-  <li><a href="#use-gitlab" id="toc-use-gitlab" class="nav-link" data-scroll-target="#use-gitlab">Use GitLab</a></li>
+  <li><a href="#use-github" id="toc-use-github" class="nav-link" data-scroll-target="#use-github">Use GitHub</a></li>
   <li><a href="#set-a-default-description" id="toc-set-a-default-description" class="nav-link" data-scroll-target="#set-a-default-description">Set a default DESCRIPTION</a></li>
   </ul></li>
   </ul>
@@ -403,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lib_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                          Library n_packages
-1 /home/runner/work/_temp/Library         95
+1 /home/runner/work/_temp/Library        120
 2      /opt/R/4.4.1/lib/R/library         29
 3 /opt/R/4.4.1/lib/R/site-library          1</code></pre>
 </div>
@@ -440,27 +460,14 @@ Description: Provides functions for learning about your R libraries, and the
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="use-gitlab" class="level3">
-<h3 class="anchored" data-anchor-id="use-gitlab">Use GitLab</h3>
-<ul>
-<li>Make an empty repo on GitLab named <code>libminer</code>: <a href="https://docs.gitlab.com/ee/user/project/" class="uri">https://docs.gitlab.com/ee/user/project/</a></li>
-<li>Choose <code>empty project</code></li>
-<li>Choose Public or Private</li>
-<li>Uncheck “Initialize repository with a README”</li>
-<li>Click “Create Project”</li>
-<li>Scroll down to “Push an existing folder” section</li>
-<li>Find the line that says <code>git remote add origin https:://gitlab...</code> and copy it to your clipboard.</li>
-<li>Navigate to the Terminal in RStudio and paste the following commands</li>
-</ul>
-<section id="tell-your-git-repository-where-its-corresponding-repository-on-gitlab-is" class="level4">
-<h4 class="anchored" data-anchor-id="tell-your-git-repository-where-its-corresponding-repository-on-gitlab-is">Tell your git repository where its corresponding repository on GitLab is</h4>
+<section id="use-github" class="level3">
+<h3 class="anchored" data-anchor-id="use-github">Use GitHub</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://gitlab.com/{your-git-lab-username}/{your-repo-name}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
 <section id="push-all-your-committed-code-to-that-repository" class="level4">
 <h4 class="anchored" data-anchor-id="push-all-your-committed-code-to-that-repository">Push all your committed code to that repository</h4>
-<p>At this step you may be required to enter in your GitLab username and password.</p>
+<p>At this step you may be required to enter in your GitHub username and password.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">--set-upstream</span> origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

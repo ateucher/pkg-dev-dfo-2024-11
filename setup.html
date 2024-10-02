@@ -169,20 +169,28 @@ div.csl-indent {
  <span class="dropdown-text">Package Creation and Metadata 🧰</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./documentation.html">
- <span class="dropdown-text">Documentation 📓</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./testing.html">
  <span class="dropdown-text">Tests 🧪</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./dependencies.html">
- <span class="dropdown-text">Managing dependencies 🐕</span></a>
+    <a class="dropdown-item" href="./dependencies_and_ci.html">
+ <span class="dropdown-text">Managing dependencies and Continuous Integration 🐕</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./ci.html">
- <span class="dropdown-text">Automated checking with GitLab 🦾</span></a>
+    <a class="dropdown-item" href="./documentation.html">
+ <span class="dropdown-text">Documentation 📓</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./website.html">
+ <span class="dropdown-text">Create a package website 🕸</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./using-the-tidyverse.html">
+ <span class="dropdown-text">Using the tidyverse in your package 🧹</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./design.html">
+ <span class="dropdown-text">Design Principles 🧑‍🎨</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./share.html">
@@ -259,26 +267,38 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documentation 📓</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tests 🧪</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependencies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Managing dependencies 🐕</span></a>
+  <a href="./dependencies_and_ci.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Managing dependencies and Continuous Integration 🐕</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ci.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Automated checking with GitLab 🦾</span></a>
+  <a href="./documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation 📓</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create a package website 🕸</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./using-the-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the tidyverse in your package 🧹</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Design Principles 🧑‍🎨</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -310,8 +330,8 @@ div.csl-indent {
   <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
   <li><a href="#mac" id="toc-mac" class="nav-link" data-scroll-target="#mac">Mac</a></li>
   </ul></li>
-  <li><a href="#gitlab" id="toc-gitlab" class="nav-link" data-scroll-target="#gitlab">GitLab</a></li>
-  <li><a href="#check-link-between-r-and-gitlab" id="toc-check-link-between-r-and-gitlab" class="nav-link" data-scroll-target="#check-link-between-r-and-gitlab">Check link between R and GitLab</a>
+  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github">GitHub</a></li>
+  <li><a href="#check-link-between-r-and-github" id="toc-check-link-between-r-and-github" class="nav-link" data-scroll-target="#check-link-between-r-and-github">Check link between R and GitHub</a>
   <ul class="collapse">
   <li><a href="#caveat-about-storing-pats-on-linux" id="toc-caveat-about-storing-pats-on-linux" class="nav-link" data-scroll-target="#caveat-about-storing-pats-on-linux">Caveat about storing PATs on Linux:</a></li>
   </ul></li>
@@ -354,8 +374,8 @@ div.csl-indent {
 <li><a href="#install-r-package-development-tools">R package development toolchain</a></li>
 <li><a href="#packages">Several R packages</a></li>
 <li><a href="#git">Git</a></li>
-<li><a href="#gitlab">GitLab account</a></li>
-<li><a href="#check-link-between-r-and-gitlab">GitLab linked to R</a></li>
+<li><a href="#github">GitHub account</a></li>
+<li><a href="#check-link-between-r-and-github">GitHub linked to R</a></li>
 </ul>
 </section>
 <section id="install-r-and-rstudio" class="level2">
@@ -418,7 +438,7 @@ div.csl-indent {
 </section>
 <section id="git" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="git">Git</h2>
-<p>We will be demonstrating the use of Git and GitLab for tracking changes during package development, and sharing and collaborating on our package. It is not strictly necessary for the workshop, but you will benefit greatly by using it.</p>
+<p>We will be demonstrating the use of Git and GitHub for tracking changes during package development, and sharing and collaborating on our package. It is not strictly necessary for the workshop, but you will benefit greatly by using it.</p>
 <section id="windows" class="level3">
 <h3 class="anchored" data-anchor-id="windows">Windows</h3>
 <p>Check if Git is installed by running <code>which git</code> in the <strong>Terminal</strong> pane in RStudio.</p>
@@ -444,27 +464,29 @@ div.csl-indent {
 <p>If you do lots of scientific computing and especially if you use command-line programs in the Terminal, we recommend using Homebrew. See <a href="https://brew.sh/">brew.sh</a> for installation instructions. To install Git using Homebrew, run the following in the Terminal: <code>brew install git</code></p>
 </div></div></section>
 </section>
-<section id="gitlab" class="level2">
-<h2 class="anchored" data-anchor-id="gitlab">GitLab</h2>
-<p>Register a GitLab account at <a href="https://gitlab.com/">gitlab.com</a>.</p>
-<p>We highly recommend the book <a href="https://happygitwithr.com/">Happy Git with R</a> for advice on setting up and using Git with R <span class="citation" data-cites="bryan">(<a href="#ref-bryan" role="doc-biblioref">Bryan and Hester, n.d.</a>)</span>.</p>
+<section id="github" class="level2">
+<h2 class="anchored" data-anchor-id="github">GitHub</h2>
+<p>Register a GitHub account at <a href="https://github.com/">github.com</a>.</p>
+<p>I highly recommend the book <a href="https://happygitwithr.com/">Happy Git with R</a> for advice on setting up and using Git with R <span class="citation" data-cites="bryan">(<a href="#ref-bryan" role="doc-biblioref">Bryan and Hester, n.d.</a>)</span>.</p>
 </section>
-<section id="check-link-between-r-and-gitlab" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="check-link-between-r-and-gitlab">Check link between R and GitLab</h2>
+<section id="check-link-between-r-and-github" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="check-link-between-r-and-github">Check link between R and GitHub</h2>
 <p>Configure your <code>user.name</code> and <code>user.email</code> for git in RStudio with:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git_config</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">user.name =</span> <span class="st">"Jane Doe"</span>,          <span class="co"># actual first and last name</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">user.email =</span> <span class="st">"jane@example.com"</span>  <span class="co"># email associated with GitLab account</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">user.email =</span> <span class="st">"jane@example.com"</span>  <span class="co"># email associated with GitHub account</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Communicating with GitLab requires authentication with your GitLAb account. This is achieved by creating and securely storing a Personal Access Token (PAT). Although focused more on GitHub, the <a href="https://usethis.r-lib.org/articles/articles/git-credentials.html">Managing Git(Hub) Credentials</a> vignette in the <strong><code>usethis</code></strong> <span class="citation" data-cites="usethis">(<a href="#ref-usethis" role="doc-biblioref">Wickham et al. 2023</a>)</span> package has details on using PATs, but for now the following should suffice.</p>
-<p>Create a PAT using these instructions:</p>
-<p><a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token" class="uri">https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token</a></p>
-<p>We suggest the following scopes for this token: api, read_api, read_user, create_runner, read_repository, write_repository.</p>
+<p>Communicating with GitHub requires authentication with your GitHub account. This is achieved by creating and securely storing a Personal Access Token (PAT). The <a href="https://usethis.r-lib.org/articles/articles/git-credentials.html">Managing Git(Hub) Credentials</a> vignette in the <strong><code>usethis</code></strong> <span class="citation" data-cites="usethis">(<a href="#ref-usethis" role="doc-biblioref">Wickham et al. 2023</a>)</span> package has details on using PATs, but for now the following should suffice.</p>
+<p>Create a PAT with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
+<li>Give the token a descriptive name, accept the default scopes, and click “Generate Token”.</li>
 <li>Copy the newly generated PAT to your clipboard.</li>
-<li>Run <code>gitcreds::gitcreds_set("https://gitlab.com")</code> in R and paste in your PAT when prompted.</li>
+<li>Run <code>gitcreds::gitcreds_set()</code> in R and paste in your PAT when prompted.</li>
 <li>After you close the PAT webpage, you won’t be able to see your PAT again! You can store it somewhere secure, such as in a password manager.</li>
 </ul>
 <section id="caveat-about-storing-pats-on-linux" class="level3 page-columns page-full">
@@ -475,7 +497,7 @@ div.csl-indent {
 <p>You may need to install the <strong><code>gitcreds</code></strong> package <span class="citation" data-cites="gitcreds">(<a href="#ref-gitcreds" role="doc-biblioref">Csárdi 2022</a>)</span>.</p>
 </div></div><p>You can now check your Git setup by asking for a “situation report”:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">git_sitrep</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">git_sitrep</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output">
 <pre><code>── Git global (user) 
@@ -487,10 +509,18 @@ div.csl-indent {
 • Default Git protocol: 'https'
 • Default initial branch name: 'main'
 
-── GitHub project 
-ℹ Project does not use GitHub</code></pre>
+── GitHub user 
+• Default GitHub host: 'https://github.com'
+• Personal access token for 'https://github.com': '&lt;discovered&gt;'
+• GitHub user: 'ateucher'
+• Token scopes: 'gist, repo, user, workflow'
+• Email(s): 'andy.teucher@gmail.com (primary)'
+ℹ No active usethis project</code></pre>
 </div>
-<p>Not all of it is relevant now, but it is essential to check whether your name and email are correct.</p>
+<p>The output shows information about the link between RStudio and GitHub. Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as “discovered”:</p>
+<div class="cell-output">
+<pre><code>Personal access token for 'https://github.com': '&lt;discovered&gt;'</code></pre>
+</div>
 </section>
 </section>
 <section id="troubleshooting" class="level2">

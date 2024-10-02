@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Managing dependencies 🐕 – 📦 Fundamentals of Package Development</title>
+<title>Managing dependencies and Continuous Integration 🐕 – 📦 Fundamentals of Package Development</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,20 +149,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Package Creation and Metadata 🧰</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./documentation.html">
- <span class="dropdown-text">Documentation 📓</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="./testing.html">
  <span class="dropdown-text">Tests 🧪</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./dependencies.html">
- <span class="dropdown-text">Managing dependencies 🐕</span></a>
+    <a class="dropdown-item" href="./dependencies_and_ci.html">
+ <span class="dropdown-text">Managing dependencies and Continuous Integration 🐕</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./ci.html">
- <span class="dropdown-text">Automated checking with GitLab 🦾</span></a>
+    <a class="dropdown-item" href="./documentation.html">
+ <span class="dropdown-text">Documentation 📓</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./website.html">
+ <span class="dropdown-text">Create a package website 🕸</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./using-the-tidyverse.html">
+ <span class="dropdown-text">Using the tidyverse in your package 🧹</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./design.html">
+ <span class="dropdown-text">Design Principles 🧑‍🎨</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./share.html">
@@ -193,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dependencies.html">Managing dependencies 🐕</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dependencies_and_ci.html">Managing dependencies and Continuous Integration 🐕</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -239,26 +247,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documentation 📓</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./testing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tests 🧪</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependencies.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Managing dependencies 🐕</span></a>
+  <a href="./dependencies_and_ci.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Managing dependencies and Continuous Integration 🐕</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ci.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Automated checking with GitLab 🦾</span></a>
+  <a href="./documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Documentation 📓</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create a package website 🕸</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./using-the-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the tidyverse in your package 🧹</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Design Principles 🧑‍🎨</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -281,15 +301,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#update-tests" id="toc-update-tests" class="nav-link" data-scroll-target="#update-tests">Update tests</a></li>
   <li><a href="#update-documentation" id="toc-update-documentation" class="nav-link" data-scroll-target="#update-documentation">Update documentation</a></li>
   <li><a href="#alternative-use-importfrom" id="toc-alternative-use-importfrom" class="nav-link" data-scroll-target="#alternative-use-importfrom">Alternative: use importFrom</a></li>
+  <li><a href="#automated-checking-with-github-actions" id="toc-automated-checking-with-github-actions" class="nav-link" data-scroll-target="#automated-checking-with-github-actions">Automated checking with GitHub Actions</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/ateucher/pkg-dev-dfo-2024-11/edit/main/dependencies.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ateucher/pkg-dev-dfo-2024-11/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/ateucher/pkg-dev-dfo-2024-11/edit/main/dependencies_and_ci.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ateucher/pkg-dev-dfo-2024-11/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Managing dependencies 🐕</h1>
+<h1 class="title">Managing dependencies and Continuous Integration 🐕</h1>
 </div>
 
 
@@ -422,6 +443,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  pkg_df</span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="automated-checking-with-github-actions" class="level2">
+<h2 class="anchored" data-anchor-id="automated-checking-with-github-actions">Automated checking with GitHub Actions</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_action</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Which action do you want to add? (0 to exit)
+(See &lt;https://github.com/r-lib/actions/tree/v2/examples&gt; for other options) 
+
+1: check-standard: Run `R CMD check` on Linux, macOS, and Windows
+2: test-coverage: Compute test coverage and report to https://about.codecov.io
+3: pr-commands: Add /document and /style commands for pull requests
+
+Selection: 1
+✔ Setting active project to '/Users/andy/dev/libminer'
+✔ Creating '.github/'
+✔ Adding '^\\.github$' to '.Rbuildignore'
+✔ Adding '*.html' to '.github/.gitignore'
+✔ Creating '.github/workflows/'
+✔ Saving 'r-lib/actions/examples/check-standard.yaml@v2' to '.github/workflows/R-CMD-check.yaml'
+• Learn more at &lt;https://github.com/r-lib/actions/blob/v2/examples/README.md&gt;.
+✔ Adding R-CMD-check badge to 'README.Rmd'
+• Re-knit 'README.Rmd' with `devtools::build_readme()`</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">build_readme</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>ℹ Installing libminer in temporary library
+ℹ Building /Users/andy/dev/libminer/README.Rmd</code></pre>
 
 
 </section>
@@ -996,4 +1041,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ateucher/pkg-dev-dfo-2024-11/edit/main/dependencies.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ateucher/pkg-dev-dfo-2024-11/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ateucher/pkg-dev-dfo-2024-11/edit/main/dependencies_and_ci.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/ateucher/pkg-dev-dfo-2024-11/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
