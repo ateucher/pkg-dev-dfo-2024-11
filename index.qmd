@@ -33,7 +33,7 @@ This will be an interactive 1-day workshop, and we will be using the RStudio IDE
 
 Please ensure you have completed the steps in [System Setup](setup.html)
 
-## Schedule
+##  Schedule (All times PST)
 
 ```{r}
 library(readr)

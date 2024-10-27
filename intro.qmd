@@ -29,7 +29,7 @@ This is intentional - for a self-guided walk-through of package development, I r
 Please note that all participants must abide by the [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
 We are committed to providing a professional, friendly and safe environment for all participants at its events, regardless of gender, sexual orientation, disability, race, ethnicity, religion, national origin or other protected class.
 
-### Schedule
+##  Schedule (All times PST)
 
 ```{r}
 library(readr)
