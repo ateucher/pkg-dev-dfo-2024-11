@@ -47,7 +47,7 @@ Download and run the latest **Rtools** installer, `Rtools.exe`, from <https://cr
 Install **XCode**.
 The easiest way is to open a Terminal window (Applications \> Utilities \> Terminal.app; or use the Terminal pane in RStudio) and type the following:
 
-```         
+```
 xcode-select --install
 ```
 
@@ -85,7 +85,6 @@ devtools::has_devel()
 ## Git
 
 We will be demonstrating the use of Git and GitHub for tracking changes during package development, and sharing and collaborating on our package.
-It is not strictly necessary for the workshop, but you will benefit greatly by using it.
 
 ### Windows
 
@@ -166,8 +165,8 @@ usethis::git_sitrep()
 ```
 
 ::: cell-output
-```         
-── Git global (user) 
+```
+── Git global (user)
 • Name: 'Andy Teucher'
 • Email: 'andy.teucher@gmail.com'
 • Global (user-level) gitignore file: '/Users/andy/.gitignore'
@@ -176,7 +175,7 @@ usethis::git_sitrep()
 • Default Git protocol: 'https'
 • Default initial branch name: 'main'
 
-── GitHub user 
+── GitHub user
 • Default GitHub host: 'https://github.com'
 • Personal access token for 'https://github.com': '<discovered>'
 • GitHub user: 'ateucher'
@@ -190,7 +189,7 @@ The output shows information about the link between RStudio and GitHub.
 Not all of it is relevant now, but it is essential to check whether your name and email are correct and the PAT is showing as "discovered":
 
 ::: cell-output
-```         
+```
 Personal access token for 'https://github.com': '<discovered>'
 ```
 :::

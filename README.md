@@ -32,10 +32,7 @@ The workshop will be taught using the RStudio IDE. You are welcome to use whiche
 ### Git and GitHub
 
 We will be demonstrating some workflows using Git and GitHub.
-Knowledge of these tools is not required, and you will absolutely be able to complete the workshop without them, but some of the lessons will be more rewarding to you if you are prepared to try them out.
 To take advantage of this you will need to Git installed on your computer, and sign up for a free GitHub account.
-
-If you are looking to get started with Git and GitHub, we recommend you register for the "What they forgot to teach you about R" workshop on Day 1, and join us for this workshop on Day 2.
 
 ## Code of Conduct
 
@@ -55,8 +52,8 @@ Andy especially enjoys developing packages to make it easier to work with spatia
 Andy is a certified Software Carpentry and Data Carpentry instructor, and has led many workshops teaching programming skills to scientists and data professionals.
 
 Sam Albers is a data scientist with 15 years experience writing code for scientific research.
-Sam wrote his first line of code to process data collected on salmon spawning in the Horsefly River watershed. 
-Gradually, he ended up spending more time writing code than studying salmon and moved into a full time data scientist role in government. 
+Sam wrote his first line of code to process data collected on salmon spawning in the Horsefly River watershed.
+Gradually, he ended up spending more time writing code than studying salmon and moved into a full time data scientist role in government.
 During that time, Sam developed several packages to facilitate reproducible research and gained a solid foundation in what ittakes to build a good R package.
 
 ------------------------------------------------------------------------
