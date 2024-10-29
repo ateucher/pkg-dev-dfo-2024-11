@@ -25,6 +25,7 @@ all(c("devtools", "roxygen2", "testthat", "knitr", "pkgdown") %in% installed.pac
 library(devtools)
 
 has_devel()
+dev_sitrep()
 ```
 
 ***back to slides***
@@ -497,7 +498,7 @@ install()
 ## Continuous Integration
 
 ```{r}
-use_guthub_actions()
+use_github_actions()
 ```
 
 **commit and push**
