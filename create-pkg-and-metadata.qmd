@@ -33,6 +33,7 @@ This should have been done in your [setup](setup.qmd), but it's not a bad idea t
 
 ```{r}
 git_sitrep()
+dev_sitrep()
 ```
 
 If the above command returns unsatisfactory information (most importantly, do you have a username and email configured), run the following command to configure git:
