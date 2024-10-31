@@ -505,6 +505,182 @@ use_github_actions()
 
 *return to slides*
 
+## Tidyverse
+
+### Demo - not part of package
+
+```{r}
+library(dplyr)
+
+starwars |> 
+  group_by(homeworld) |> 
+  count()
+```
+
+Turn this into a function that can summarise on any variable
+
+```{r}
+sw_summary <- function(var) {
+  starwars |> 
+    group_by(var) |> 
+    count()
+}
+```
+
+```{r}
+sw_summary <- function(var) {
+  starwars |> 
+    group_by({{ var }}) |> 
+    count()
+}
+```
+
+### Setup
+
+```{r}
+use_package("dplyr")
+use_r("summarize_pkgs")
+```
+
+```{r}
+summarize_pkgs <- function(by) {
+  pkgs <- dplyr::as_tibble(utils::installed.packages())
+
+  dplyr::group_by(pkgs, by) |>
+    dplyr::count()
+}
+```
+
+```{r}
+load_all()
+summarize_pkgs(LibPath)
+```
+
+**Errors - no column called 'by'**
+
+### 2a - use curly-curly with bare names
+
+```{r}
+summarize_pkgs <- function(by) {
+  pkgs <- dplyr::as_tibble(utils::installed.packages())
+
+  dplyr::group_by(pkgs, {{ by }}) |>
+    dplyr::count()
+}
+```
+
+```{r}
+load_all()
+summarize_pkgs(LibPath)
+```
+
+### 2b - use .data\[\[x\]\] with character
+
+```{r}
+use_import_from("rlang", ".data")
+```
+
+```{r}
+summarize_pkgs <- function(by) {
+  pkgs <- dplyr::as_tibble(utils::installed.packages())
+
+  dplyr::group_by(pkgs, .data[[by]]) |>
+    dplyr::count()
+}
+```
+
+```{r}
+load_all()
+summarize_pkgs("License")
+```
+
+### 3 - add sizes
+
+```{r}
+summarize_pkgs <- function(by) {
+  pkgs <- dplyr::as_tibble(utils::installed.packages())
+  
+  pkgs <- dplyr::mutate(
+    pkgs,
+    size = map_dbl(fs::path(LibPath, Package), \(x) {
+      sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+    })
+  )
+  
+  dplyr::group_by(pkgs, {{by}}) |>
+    dplyr::summarise(
+      n = dplyr::n(), 
+      size = sum(size)
+    )
+}
+```
+
+```{r}
+load_all()
+summarize_pkgs(LibPath)
+```
+
+### 4 - add .data
+
+```{r}
+summarize_pkgs <- function(by) {
+  pkgs <- dplyr::as_tibble(utils::installed.packages())
+  
+  pkgs <- dplyr::mutate(
+    pkgs,
+    size = map_dbl(fs::path(.data$LibPath, Package), \(x) {
+      sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+    })
+  )
+  
+  dplyr::group_by(pkgs, {{by}}) |>
+    dplyr::summarise(
+      n = dplyr::n(), 
+      size = sum(.data$size)
+    )
+}
+```
+
+### 5 use ... for multiple by's
+
+```{r}
+summarize_pkgs <- function(...) {
+  pkgs <- dplyr::as_tibble(utils::installed.packages())
+
+    pkgs <- dplyr::mutate(
+      pkgs,
+      size = map_dbl(fs::path(.data$LibPath, Package), \(x) {
+        sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+      })
+    )
+
+  dplyr::group_by(pkgs, ...) |>
+    dplyr::summarise(n = dplyr::n(), size = sum(.data$size))
+}
+```
+
+### Final
+
+```{r}
+summarize_pkgs <- function(...) {
+  pkgs <- dplyr::as_tibble(utils::installed.packages())
+  
+  pkgs <- dplyr::mutate(
+    pkgs,
+    size = map_dbl(fs::path(.data$LibPath, Package), \(x) {
+      sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+    })
+  )
+  
+  dplyr::group_by(pkgs, ...) |>
+    dplyr::summarise(
+      n = dplyr::n(),
+      total_size = sum(.data$size),
+      mean_size = sum(.data$size)
+    )
+}
+```
+
 ## Vignettes
 
 ```{r}
