@@ -405,14 +405,23 @@ lib_summary(sizes = TRUE)
 use_import_from("purrr", "map_dbl")
 ```
 
-*Look at: DESCRIPTION, R/libminer-package.R, NAMESPACE*
+*Look at: DESCRIPTION, R/libminer-package.R, NAMESPACE* and see what that did.
 
 ```{r}
-if (sizes) {
-  pkg_df$lib_size <- map_dbl(
-    pkg_df$Library,
-    ~ sum(fs::file_size(fs::dir_ls(.x, recurse = TRUE))),
-  )
+lib_summary <- function(sizes = FALSE) {
+  pkgs <- utils::installed.packages()
+  pkg_tbl <- table(pkgs[, "LibPath"])
+  pkg_df <- as.data.frame(pkg_tbl, stringsAsFactors = FALSE)
+  names(pkg_df) <- c("Library", "n_packages")
+
+  if (sizes) {
+    pkg_df$lib_size <- map_dbl(
+      pkg_df$Library,
+      ~ sum(fs::file_size(fs::dir_ls(.x, recurse = TRUE))),
+    )
+  }
+
+  pkg_df
 }
 ```
 
