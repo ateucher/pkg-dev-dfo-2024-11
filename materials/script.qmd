@@ -580,6 +580,7 @@ No `fs::`
 #' Generate a dataframe of installed packages
 #' 
 #' @return dataframe of all packages installed on a system
+#' @export
 lib <- function() {
   pkgs <- utils::installed.packages()
   as.data.frame(pkgs, stringsAsFactors = FALSE)
