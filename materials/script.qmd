@@ -52,6 +52,7 @@ use_git_config(
 
 ```{r}
 git_sitrep()
+dev_sitrep()
 ```
 
 Git global: Name, email GitHub user: PAT discovered, User, email(s)
@@ -135,13 +136,13 @@ check()
 
 ***back to slides***
 
-#### Tell your git repository where its corresponding repository on GitHub is
-
-```{bash}
-git remote add origin https://GitHub.com/boshek/foo.git
-```
 
 #### Push all your committed code to that repository
+
+
+```{r}
+use_github()
+```
 
 At this step you may be required to enter in your GitHub username and password.
 
@@ -506,18 +507,34 @@ install()
 ## Continuous Integration
 
 ```{r}
-use_guthub_actions()
+use_github_actions()
 ```
 
 **commit and push**
 
 *return to slides*
 
+# Creating a website
+
+** go over what files were created **
+```{r}
+use_pkgdown_github_pages()
+```
+
 ## Vignettes
 
+** go over what files were created **
 ```{r}
 use_vignette("lib-sitrep", "Package Library Situation Report")
 ```
+
+** add an article with ggplot2 **
+```{r}
+use_article("musings-lib", title = "Musings on the state of libminer")
+```
+
+add ggplot2 to action
+
 
 ## Releasing
 
