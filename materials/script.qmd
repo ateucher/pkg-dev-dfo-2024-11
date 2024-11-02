@@ -514,6 +514,146 @@ use_github_action()
 
 *return to slides*
 
+# Design Principles
+
+Refactor this function to add 2 helper functions
+```{r}
+lib_summary <- function(sizes = FALSE) {
+  pkgs <- utils::installed.packages()
+  pkg_tbl <- table(pkgs[, "LibPath"])
+  pkg_df <- as.data.frame(pkg_tbl, stringsAsFactors = FALSE)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df$lib_size <- map_dbl(
+      pkg_df$Library,
+      ~ sum(fs::file_size(fs::dir_ls(.x, recurse = TRUE))),
+    )
+  }
+  pkg_df
+}
+```
+
+into:
+
+```{r}
+#' Generate a dataframe of installed packages
+#' 
+#' @return dataframe of all packages installed on a system
+lib <- function() {
+  pkgs <- utils::installed.packages()
+  as.data.frame(pkgs, stringsAsFactors = FALSE)
+}
+
+#' calculate sizes
+#'
+#' @param df a data.frame
+#'
+#' @return df with a lib_size column
+#' @noRd
+calculate_sizes <- function(df) {
+  df$lib_size <- map_dbl(
+    df$library,
+    ~ sum(file_size(dir_ls(.x, recurse = TRUE)))
+  )
+  df
+}
+
+lib_summary <- function(sizes = FALSE) {
+  pkg_df <- lib()
+  pkg_df <- table(pkg_df$LibPath)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df <- calculate_sizes(pkg_df)
+  }
+  pkg_df
+}
+```
+
+`check, commit and push`
+
+No `fs::`
+
+
+```{r}
+#' Generate a dataframe of installed packages
+#' 
+#' @return dataframe of all packages installed on a system
+lib <- function() {
+  pkgs <- utils::installed.packages()
+  as.data.frame(pkgs, stringsAsFactors = FALSE)
+}
+
+#' calculate sizes
+#'
+#' @param df a data.frame
+#'
+#' @return df with a lib_size column
+#' @noRd
+calculate_sizes <- function(df) {
+  df$lib_size <- map_dbl(
+    df$library,
+    ~ sum(fs::file_size(fs::dir_ls(.x, recurse = TRUE)))
+  )
+  df
+}
+
+lib_summary <- function(sizes = FALSE) {
+  pkg_df <- lib()
+  pkg_df <- table(pkg_df$LibPath)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df <- calculate_sizes(pkg_df)
+  }
+  pkg_df
+}
+```
+
+** back slides **
+
+## Input checking
+
+```{r}
+lib_summary <- function(sizes = FALSE) {
+  pkg_df <- lib()
+  pkg_df <- table(pkg_df$LibPath)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df <- calculate_sizes(pkg_df)
+  }
+  pkg_df
+}
+```
+
+to:
+
+```{r}
+lib_summary <- function(sizes = FALSE) {
+  if (!is.logical(sizes)) {
+    stop("sizes should be a logical (TRUE/FALSE) value", call. = FALSE)
+  }
+  pkg_df <- lib()
+  pkg_df <- table(pkg_df$LibPath)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df <- calculate_sizes(pkg_df)
+  }
+  pkg_df
+}
+```
+
+## Add a test
+
+```{r}
+expect_error(lib_summary(sizes = 10))
+```
+
+*back to slides*
+
 # Creating a website
 
 ** go over what files were created **
@@ -574,20 +714,6 @@ lib_summary <- function(sizes = FALSE) {
     pkg_df <- calculate_sizes(pkg_df)
   }
   pkg_df
-}
-
-#' calculate sizes
-#'
-#' @param df a data.frame
-#'
-#' @return df with a lib_size column
-#' @noRd
-calculate_sizes <- function(df) {
-  df$lib_size <- map_dbl(
-    df$library,
-    ~ sum(file_size(dir_ls(.x, recurse = TRUE)))
-  )
-  df
 }
 ```
 
