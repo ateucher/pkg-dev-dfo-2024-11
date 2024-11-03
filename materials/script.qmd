@@ -779,11 +779,11 @@ lib_summary <- function(...) {
 ```{r}
 lib_summary <- function(..., sizes = FALSE) {
   if (!is.logical(sizes)) {
-    cli::cli_abort("{.var sizes} should be a {.cls {class(TRUE)}} value, not {.obj_type_friendly {sizes}}")
+    stop("'sizes' must be logical (TRUE/FALSE).", call. = FALSE)
   }
   
   lib() |> 
-    calculate_sizes(calc = sizes) |> 
+    calculate_sizes(do_calc = sizes) |> 
     dplyr::group_by(...) |> 
     dplyr::summarise(
       n = dplyr::n(),
@@ -791,8 +791,8 @@ lib_summary <- function(..., sizes = FALSE) {
     )
 }
 
-calculate_sizes <- function(df, calc) {
-  if (!isTRUE(calc)) return(df)
+calculate_sizes <- function(df, do_calc) {
+  if (!isTRUE(do_calc)) return(df)
   
   df |> 
     dplyr::mutate(
