@@ -1,3 +1,13 @@
+chatty <- function() {
+  message("Hello there!")
+  warning("You have been warned!")
+}
+chatty()
+suppressMessages(chatty())
+suppressWarnings(chatty())
+
+
+
 #+ eval = FALSE
 cli_bullets(c(
   "*" = "{.emph Emphasized} text",
