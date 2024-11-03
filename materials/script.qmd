@@ -655,6 +655,10 @@ expect_error(lib_summary(sizes = 10))
 
 *back to slides*
 
+## Code readability
+
+demo styler
+
 # Creating a website
 
 ** go over what files were created **
