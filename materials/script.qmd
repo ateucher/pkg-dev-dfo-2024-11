@@ -507,7 +507,7 @@ install()
 ## Continuous Integration
 
 ```{r}
-use_github_actions()
+use_github_action()
 ```
 
 **commit and push**
