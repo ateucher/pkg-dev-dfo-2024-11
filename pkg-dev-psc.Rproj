@@ -18,4 +18,4 @@ PackageInstallArgs: --no-multiarch --with-keep.source
 
 MarkdownWrap: Sentence
 MarkdownReferences: Document
-MarkdownCanonical: Yes
+MarkdownCanonical: No
