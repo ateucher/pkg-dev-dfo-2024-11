@@ -562,6 +562,7 @@ calculate_sizes <- function(df) {
 lib_summary <- function(sizes = FALSE) {
   pkg_df <- lib()
   pkg_df <- table(pkg_df$LibPath)
+  pkg_df <- as.data.frame(pkg_df, stringsAsFactors = FALSE)
   names(pkg_df) <- c("Library", "n_packages")
   
   if (sizes) {
