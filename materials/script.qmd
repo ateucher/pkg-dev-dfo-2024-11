@@ -535,6 +535,40 @@ use_article("musings-lib", title = "Musings on the state of libminer")
 
 add ggplot2 to action
 
+## CLI
+
+### Final
+
+```{r}
+lib_summary <- function(..., sizes = FALSE) {
+  if (!is.logical(sizes)) {
+    cli::cli_abort("{.var sizes} should be a {.cls {class(TRUE)}} value, not {.obj_type_friendly {sizes}}")
+  }
+  
+  lib() |> 
+    calculate_sizes(do_calc = sizes) |> 
+    dplyr::group_by(...) |> 
+    dplyr::summarise(
+      n = dplyr::n(),
+      dplyr::across(dplyr::any_of("size"), sum)
+    )
+}
+
+calculate_sizes <- function(df, do_calc) {
+  if (!isTRUE(do_calc)) return(df)
+  
+  cli::cli_inform(c("i" = "Calculating sizes..."))
+  
+  df |> 
+    dplyr::mutate(
+      size = purrr::map_dbl(
+        fs::path(.data$LibPath, .data$Package),
+        \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+      )
+    )
+}
+```
+
 
 ## Releasing
 
