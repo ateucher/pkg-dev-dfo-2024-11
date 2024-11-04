@@ -887,7 +887,6 @@ calculate_sizes <- function(df) {
       )
     )
 }
-
 ```
 
 ```{r}
@@ -938,6 +937,8 @@ lib_summary <- function(...) {
 
 ### Final - make sizes conditional again
 
+Also, drop groups so we don't get the message any more
+
 ```{r}
 lib_summary <- function(..., sizes = FALSE) {
   if (!is.logical(sizes)) {
@@ -949,7 +950,8 @@ lib_summary <- function(..., sizes = FALSE) {
     dplyr::group_by(...) |> 
     dplyr::summarise(
       n = dplyr::n(),
-      dplyr::across(dplyr::any_of("size"), sum)
+      dplyr::across(dplyr::any_of("size"), sum),
+      .groups = "drop"
     )
 }
 
@@ -997,7 +999,8 @@ lib_summary <- function(..., sizes = FALSE) {
     dplyr::group_by(...) |> 
     dplyr::summarise(
       n = dplyr::n(),
-      dplyr::across(dplyr::any_of("size"), sum)
+      dplyr::across(dplyr::any_of("size"), sum),
+      .groups = "drop"
     )
 }
 
@@ -1014,6 +1017,14 @@ calculate_sizes <- function(df, do_calc) {
       )
     )
 }
+```
+
+```{r}
+lib_summary(LibPath, License)
+lib_summary(LibPath, License, sizes = TRUE)
+lib_summary(LibPath, License, sizes = 10)
+lib_summary(LibPath, License, sizes = "hello")
+lib_summary(LibPath, License, sizes = NULL)
 ```
 
 ## Releasing
