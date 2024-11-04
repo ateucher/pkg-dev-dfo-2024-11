@@ -1,16 +1,17 @@
 Date,Time (PST),Topic,Duration
 2024-11-04,08:00 - 09:20,What is a Package? Package Structure and State,80 min
 2024-11-04,09:20 - 09:35,Break,15 min
-2024-11-04,09:35 - 10:55,Package Creation and Metadata; Documentation,80 min
+2024-11-04,09:35 - 10:55,Package Creation and Metadata,80 min
 2024-11-04,10:55 - 11:10,Break,15 min
-2024-11-04,11:10 - 12:30,Testing Your Package,80 min
-2024-11-05,08:00 - 09:20,Dependencies and Continuous Integration,80 min
+2024-11-04,11:10 - 12:30,Documentation,80 min
+2024-11-05,08:00 - 09:20,Testing & Dependencies,80 min
 2024-11-05,09:20 - 09:35,Break,15 min
-2024-11-05,09:35 - 10:55,Design Principles,80 min
+2024-11-05,09:35 - 10:55,Continuous Integration & Design Principles,80 min
 2024-11-05,10:55 - 11:10,Break,15 min
-2024-11-05,11:10 - 12:30,Website Creation and General Package Discussion,80 min
+2024-11-05,11:10 - 12:30,Design Principles cont'd & Website Creation,80 min
 2024-11-06,08:00 - 09:20,Using the Tidyverse in Your Package,80 min
 2024-11-06,09:20 - 09:35,Break,15 min
 2024-11-06,09:35 - 10:55,Communicating with your Users,80 min
 2024-11-06,10:55 - 11:10,Break,15 min
-2024-11-06,11:10 - 12:30,Effective Use of GitHub + Distribution,80 min
+2024-11-06,11:10 - 12:30,Distribution & General Package Discussion,80 min
+2024-11-06,If there's time, Effective Use of GitHub, ?? min
