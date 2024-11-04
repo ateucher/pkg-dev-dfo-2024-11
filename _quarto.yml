@@ -13,7 +13,7 @@ website:
       - href: index.qmd
         text: Home
       - sidebar:modules
-      - href: materials/slides.pdf
+      - href: materials/pkg-dev-dfo.pdf
         text: Slides (PDF)
         aria-label: "PDF of slides"
   repo-url: https://github.com/ateucher/pkg-dev-dfo-2024-11
