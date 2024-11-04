@@ -696,9 +696,11 @@ add ggplot2 to action
 
 ### Demo - not part of package
 
+Do in a new file eg scratch/tidyverse-testing.R and add scratch to Rbuildignore
+
 ### data masking
 
-Error:
+Error: object mpg not found
 
 ```{r}
 var_summary <- function(data, var) {
@@ -742,6 +744,8 @@ big_cars_summary <- function(var) {
 big_cars_summary(disp)
 ```
 
+### Your turn solution
+
 ```{r}
 height_sum <- function(data, group_var) {
   data |> 
@@ -754,6 +758,8 @@ height_sum <- function(data, group_var) {
 
 height_sum(starwars, hair_color)
 ```
+
+### Your turn solution
 
 ```{r}
 height_sum <- function(data, ...) {
@@ -783,6 +789,8 @@ mtcars |>
   var_summary(mpg)
 
 ```
+
+### Your turn solution
 
 ```{r}
 dynamic_sum <- function(data, group_var, sum_var) {
@@ -967,6 +975,14 @@ lib_summary(LibPath, License)
 lib_summary(LibPath, License, sizes = TRUE)
 lib_summary(LibPath, License, sizes = 10)
 ```
+
+```{r}
+test()
+# update tests
+check()
+# update documentation
+```
+
 
 ## Releasing
 
