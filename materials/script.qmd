@@ -27,6 +27,11 @@ library(devtools)
 has_devel()
 ```
 
+```{r}
+git_sitrep()
+dev_sitrep()
+```
+
 ***back to slides***
 
 ## Create a package
@@ -50,10 +55,7 @@ use_git_config(
 )
 ```
 
-```{r}
-git_sitrep()
-dev_sitrep()
-```
+
 
 Git global: Name, email GitHub user: PAT discovered, User, email(s)
 
@@ -266,6 +268,74 @@ lib_summary() # note one more package than before - that's yours!
 
 **commit and push**
 
+
+## README
+
+```{r}
+use_readme_rmd()
+```
+
+````         
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# libminer
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+The goal of libminer is to provide an overview of your R library setup. It is a toy
+package created as a part of a workshop and not meant for serious use.
+
+## Installation
+
+You can install the development version of libminer from [GitHub](https://GitHub.com/) with:
+
+```r
+# install.packages("devtools")
+devtools::install_GitHub("ateucher/libminer")
+```
+
+## Example usage
+
+To get a count of installed packages in each of your library locations, 
+optionally with the total sizes, use the `lib_summary()` function:
+
+```{{r example}}
+library(libminer)
+lib_summary()
+# specify `sizes = TRUE` to calculate the total size on disk of your packages
+lib_summary(sizes = TRUE)
+```
+````
+
+```{r}
+build_readme()
+```
+
+```{r}
+check()
+
+install()
+```
+
+**commit + push**
+
+*return to slides*
+
 ## Testing
 
 **restart R**
@@ -437,73 +507,6 @@ check()
 
 **commit and push**
 
-## README
-
-```{r}
-use_readme_rmd()
-```
-
-````         
----
-output: github_document
----
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
-
-# libminer
-
-<!-- badges: start -->
-
-<!-- badges: end -->
-
-The goal of libminer is to provide an overview of your R library setup. It is a toy
-package created as a part of a workshop and not meant for serious use.
-
-## Installation
-
-You can install the development version of libminer from [GitHub](https://GitHub.com/) with:
-
-```r
-# install.packages("devtools")
-devtools::install_GitHub("ateucher/libminer")
-```
-
-## Example usage
-
-To get a count of installed packages in each of your library locations, 
-optionally with the total sizes, use the `lib_summary()` function:
-
-```{{r example}}
-library(libminer)
-lib_summary()
-# specify `sizes = TRUE` to calculate the total size on disk of your packages
-lib_summary(sizes = TRUE)
-```
-````
-
-```{r}
-build_readme()
-```
-
-```{r}
-check()
-
-install()
-```
-
-**commit**
-
-*return to slides*
-
 ## Continuous Integration
 
 ```{r}
@@ -513,6 +516,158 @@ use_github_action()
 **commit and push**
 
 *return to slides*
+
+# Design Principles
+
+Refactor this function to add 2 helper functions
+```{r}
+lib_summary <- function(sizes = FALSE) {
+  pkgs <- utils::installed.packages()
+  pkg_tbl <- table(pkgs[, "LibPath"])
+  pkg_df <- as.data.frame(pkg_tbl, stringsAsFactors = FALSE)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df$lib_size <- map_dbl(
+      pkg_df$Library,
+      \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE))),
+    )
+  }
+  pkg_df
+}
+```
+
+into:
+
+```{r}
+#' Generate a dataframe of installed packages
+#' 
+#' @return dataframe of all packages installed on a system
+lib <- function() {
+  pkgs <- utils::installed.packages()
+  as.data.frame(pkgs, stringsAsFactors = FALSE)
+}
+
+#' calculate sizes
+#'
+#' @param df a data.frame
+#'
+#' @return df with a lib_size column
+#' @noRd
+calculate_sizes <- function(df) {
+  df$lib_size <- map_dbl(
+    df$library,
+    ~ sum(file_size(dir_ls(.x, recurse = TRUE)))
+  )
+  df
+}
+
+lib_summary <- function(sizes = FALSE) {
+  pkg_df <- lib()
+  pkg_df <- table(pkg_df$LibPath)
+  pkg_df <- as.data.frame(pkg_df, stringsAsFactors = FALSE)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df <- calculate_sizes(pkg_df)
+  }
+  pkg_df
+}
+```
+
+`check, commit and push`
+
+No `fs::`
+
+
+```{r}
+#' Generate a dataframe of installed packages
+#' 
+#' @return dataframe of all packages installed on a system
+#' @export
+lib <- function() {
+  pkgs <- utils::installed.packages()
+  as.data.frame(pkgs, stringsAsFactors = FALSE)
+}
+
+#' calculate sizes
+#'
+#' @param df a data.frame
+#'
+#' @return df with a lib_size column
+#' @noRd
+calculate_sizes <- function(df) {
+  df$lib_size <- map_dbl(
+    df$library,
+    ~ sum(fs::file_size(fs::dir_ls(.x, recurse = TRUE)))
+  )
+  df
+}
+
+lib_summary <- function(sizes = FALSE) {
+  pkg_df <- lib()
+  pkg_df <- table(pkg_df$LibPath)
+  pkg_df <- as.data.frame(pkg_df, stringsAsFactors = FALSE)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df <- calculate_sizes(pkg_df)
+  }
+  pkg_df
+}
+```
+
+** back slides **
+
+## Input checking
+
+```{r}
+lib_summary <- function(sizes = FALSE) {
+  pkg_df <- lib()
+  pkg_df <- table(pkg_df$LibPath)
+  pkg_df <- as.data.frame(pkg_df, stringsAsFactors = FALSE)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df <- calculate_sizes(pkg_df)
+  }
+  pkg_df
+}
+```
+
+to:
+
+```{r}
+lib_summary <- function(sizes = FALSE) {
+  if (!is.logical(sizes)) {
+    stop("sizes should be a logical (TRUE/FALSE) value", call. = FALSE)
+  }
+  pkg_df <- lib()
+  pkg_df <- table(pkg_df$LibPath)
+  pkg_df <- as.data.frame(pkg_df, stringsAsFactors = FALSE)
+  names(pkg_df) <- c("Library", "n_packages")
+  
+  if (sizes) {
+    pkg_df <- calculate_sizes(pkg_df)
+  }
+  pkg_df
+}
+```
+
+## Add a test
+
+```{r}
+expect_error(lib_summary(sizes = 10))
+```
+
+## update README
+- include `lib()`
+
+*back to slides*
+
+## Code readability
+
+demo styler
 
 # Creating a website
 
@@ -576,67 +731,4 @@ calculate_sizes <- function(df, do_calc) {
 use_news_md()
 ```
 
-## Bonus - factoring out an internal function
 
-### First refactor
-
--   designed to fail CI so don't check() before commiting and pushing
-
-```{r}
-#' R Library Summary
-#'
-#' Provides a brief summary of the package
-#' libraries on your machine
-#'
-#' @param sizes a logical indicating whether or not to calculate
-#'    sizes
-#'
-#' @return A data.frame containing the count
-#'    of packages in each of your libraries.
-#' @export
-#'
-#' @examples
-#' lib_summary()
-#' lib_summary(sizes = TRUE)
-lib_summary <- function(sizes = FALSE) {
-  pkgs <- utils::installed.packages()
-  pkg_tbl <- table(pkgs[, "LibPath"])
-  pkg_df <- as.data.frame(pkg_tbl, stringsAsFactors = FALSE)
-  names(pkg_df) <- c("library", "n_packages")
-
-  if (sizes) {
-    pkg_df <- calculate_sizes(pkg_df)
-  }
-  pkg_df
-}
-
-#' calculate sizes
-#'
-#' @param df a data.frame
-#'
-#' @return df with a lib_size column
-#' @noRd
-calculate_sizes <- function(df) {
-  df$lib_size <- map_dbl(
-    df$library,
-    ~ sum(file_size(dir_ls(.x, recurse = TRUE)))
-  )
-  df
-}
-```
-
-```{r}
-#' calculate sizes
-#'
-#' @param df a data.frame
-#'
-#' @return df with a lib_size column
-#' @noRd
-calculate_sizes <- function(df) {
-  df$lib_size <- purrr::map_dbl(
-    df$library,
-    ~ sum(fs::file_size(fs::dir_ls(.x, recurse = TRUE)))
-  )
-  df
-}
-```
