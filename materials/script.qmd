@@ -18,6 +18,12 @@ execute:
 ## Get Ready
 
 ```{r}
+install.packages(
+  c("devtools", "roxygen2", "testthat", "knitr", "pkgdown")
+)
+```
+
+```{r}
 all(c("devtools", "roxygen2", "testthat", "knitr", "pkgdown") %in% installed.packages())
 ```
 
@@ -26,16 +32,18 @@ library(devtools)
 
 has_devel()
 dev_sitrep()
+git_sitrep()
 ```
 
-```{r}
-git_sitrep()
-dev_sitrep()
-```
+go through each line
 
 ***back to slides***
 
+## BREAK
+
 ## Create a package
+
+Discussion how that path expansion won't work on windows
 
 ```{r}
 library(devtools)
@@ -49,10 +57,10 @@ create_package("~/Desktop/libminer")
 ```{r}
 # gert::git_config()
 # gert::git_config_global()
-
+library(devtools)
 use_git_config(
-  user.name = "Andy Teucher", 
-  user.email = "andy.teucher@gmail.com"
+  user.name = "Sam Albers", 
+  user.email = "sam.albers@gmail.com"
 )
 ```
 
@@ -63,6 +71,10 @@ Git global: Name, email GitHub user: PAT discovered, User, email(s)
 ```{r}
 use_git()
 ```
+
+**Explain that `use_git` automatically commits everything in the repo. 
+
+Ok but loading devtools all the time is getting annoying.
 
 ***back to slides***
 
@@ -123,8 +135,8 @@ Package: libminer
 Title: Explore Your R Libraries
 Version: 0.0.0.9000
 Authors@R: 
-    person("Andy", "Teucher", , "andy.teucher@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-7840-692X"))
+    person("Sam", "Albers", , "sam.albers@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-9270-7884"))
 Description: Provides functions for learning about your R libraries, and the 
     packages you have installed.
 ```
@@ -180,10 +192,10 @@ options(
 options(
   usethis.description = list(
     "Authors@R" = utils::person(
-      "Andy", "Teucher",
-      email = "andy.teucher@gmail.com",
+      "Sam", "Albers",
+      email = "sam.albers@gmail.com",
       role = c("aut", "cre"),
-      comment = c(ORCID = "0000-0002-7840-692X")
+      comment = c(ORCID = "0000-0002-9270-7884")
     )
   )
 )
@@ -318,8 +330,6 @@ optionally with the total sizes, use the `lib_summary()` function:
 ```{{r example}}
 library(libminer)
 lib_summary()
-# specify `sizes = TRUE` to calculate the total size on disk of your packages
-lib_summary(sizes = TRUE)
 ```
 ````
 
@@ -488,7 +498,7 @@ lib_summary <- function(sizes = FALSE) {
   if (sizes) {
     pkg_df$lib_size <- map_dbl(
       pkg_df$Library,
-      \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE))),
+      \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
     )
   }
 
@@ -531,7 +541,7 @@ lib_summary <- function(sizes = FALSE) {
   if (sizes) {
     pkg_df$lib_size <- map_dbl(
       pkg_df$Library,
-      \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE))),
+      \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
     )
   }
   pkg_df
@@ -544,6 +554,7 @@ into:
 #' Generate a dataframe of installed packages
 #' 
 #' @return dataframe of all packages installed on a system
+#' @export
 lib <- function() {
   pkgs <- utils::installed.packages()
   as.data.frame(pkgs, stringsAsFactors = FALSE)
@@ -563,17 +574,35 @@ calculate_sizes <- function(df) {
   df
 }
 
+#' Provides a brief summary of the package libraries on your machine
+#'
+#' @param sizes Should the sizes of the libraries be calculated?
+#'   Logical; default `FALSE`.
+#'
+#' @return A data.frame containing the count of packages in each of the user's
+#'   libraries. A `lib_size` column is included if `sizes = TRUE`.
+#' @export
+#'
+#' @examples
+#' lib_summary()
+#' lib_summary(sizes = TRUE)
 lib_summary <- function(sizes = FALSE) {
   pkg_df <- lib()
   pkg_df <- table(pkg_df$LibPath)
   pkg_df <- as.data.frame(pkg_df, stringsAsFactors = FALSE)
   names(pkg_df) <- c("Library", "n_packages")
-  
+
   if (sizes) {
     pkg_df <- calculate_sizes(pkg_df)
   }
+
   pkg_df
 }
+```
+
+
+```{r}
+document()
 ```
 
 `check, commit and push`
@@ -599,7 +628,7 @@ lib <- function() {
 #' @noRd
 calculate_sizes <- function(df) {
   df$lib_size <- map_dbl(
-    df$library,
+    df$Library,
     \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
   )
   df
@@ -617,6 +646,19 @@ lib_summary <- function(sizes = FALSE) {
   pkg_df
 }
 ```
+
+## update README
+- include `lib()` in example usage
+
+````
+To get a nicely formatted tibble of your installed packages, use the `lib()`
+function:
+
+```{r}
+library(libminer)
+lib()
+```
+````
 
 ** back slides **
 
@@ -655,14 +697,13 @@ lib_summary <- function(sizes = FALSE) {
 }
 ```
 
-## Add a test
+## Modify a test
 
+explain escape parentheses
 ```{r}
-expect_error(lib_summary(sizes = 10))
+expect_error(lib_summary(sizes = "foo"), regexp = "sizes should be a logical \\(TRUE/FALSE\\) value")
 ```
 
-## update README
-- include `lib()`
 
 *back to slides*
 
