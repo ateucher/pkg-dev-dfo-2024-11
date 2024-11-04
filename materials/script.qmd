@@ -709,6 +709,12 @@ expect_error(lib_summary(sizes = "foo"), regexp = "sizes should be a logical \\(
 
 ## Code readability
 
+- 80 character lines
+- spaces around operators
+- proper indentation
+- newlines where appropriate
+- don't be afraid of vertical spaces
+
 demo styler
 
 # Creating a website
