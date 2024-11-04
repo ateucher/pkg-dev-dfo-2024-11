@@ -845,6 +845,64 @@ dynamic_sum <- function(data, group_var, sum_var) {
 dynamic_sum(starwars, hair_color, mass)
 ```
 
+### tidyselect
+
+```{r}
+mtcars |>
+  dplyr::group_by(cyl) |>
+  dplyr::summarise(
+    dplyr::across(c("mpg", "disp"), mean)
+  )
+
+cols <- c("mpg", "disp", "xyz")
+mtcars |>
+  dplyr::group_by(cyl) |>
+  dplyr::summarise(
+    dplyr::across(dplyr::all_of(cols), mean)
+  )
+
+cols <- c("mpg", "disp", "xyz")
+mtcars |>
+  dplyr::group_by(cyl) |>
+  dplyr::summarise(
+    dplyr::across(dplyr::any_of(cols), mean)
+  )
+```
+
+Using a character vector:
+
+```{r}
+summy <- function(df, cols) {
+  df |> 
+    group_by(.data$cyl) |> 
+    summarise(
+      across(all_of(cols), .fns = mean)
+    )
+}
+```
+
+```{r}
+summy(mtcars, c("mpg", "disp"))
+```
+
+Using bare names or tidy-select helpers:
+
+```{r}
+summy <- function(df, cols) {
+  df |> 
+    group_by(.data$cyl) |> 
+    summarise(
+      across({{ cols }}, .fns = mean)
+    )
+}
+```
+
+```{r}
+summy(mtcars, c(mpg, disp))
+summy(mtcars, starts_with("mp"))
+summy(mtcars, where(is.numeric))
+```
+
 ### Setup
 
 ```{r}
