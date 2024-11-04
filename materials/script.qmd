@@ -808,11 +808,12 @@ dynamic_sum(starwars, hair_color, mass)
 
 ```{r}
 use_package("dplyr")
-use_r("summarize_pkgs")
 ```
 
+We are using the new base pipe, need R >= 4.1
+
 ```{r}
-summarize_pkgs <- function(by) {
+lib_summary <- function(by) {
   pkgs <- lib()
 
   dplyr::group_by(pkgs, by) |>
@@ -822,7 +823,7 @@ summarize_pkgs <- function(by) {
 
 ```{r}
 load_all()
-summarize_pkgs(LibPath)
+lib_summary(LibPath)
 ```
 
 **Errors - no column called 'by'**
@@ -830,7 +831,7 @@ summarize_pkgs(LibPath)
 ### 2a - use curly-curly with bare names
 
 ```{r}
-summarize_pkgs <- function(by) {
+lib_summary <- function(by) {
   pkgs <- lib()
 
   dplyr::group_by(pkgs, {{ by }}) |>
@@ -840,7 +841,7 @@ summarize_pkgs <- function(by) {
 
 ```{r}
 load_all()
-summarize_pkgs(LibPath)
+lib_summary(LibPath)
 ```
 
 ### 2b - use .data[[x]] with character
@@ -850,7 +851,7 @@ use_import_from("rlang", ".data")
 ```
 
 ```{r}
-summarize_pkgs <- function(by) {
+lib_summary <- function(by) {
   pkgs <- lib()
 
   dplyr::group_by(pkgs, .data[[by]]) |>
@@ -860,13 +861,13 @@ summarize_pkgs <- function(by) {
 
 ```{r}
 load_all()
-summarize_pkgs("License")
+lib_summary("License")
 ```
 
 ### 3 - add sizes
 
 ```{r}
-summarize_pkgs <- function(by) {
+lib_summary <- function(by) {
   pkgs <- lib()
   
   pkgs <- calculate_sizes(pkgs)
@@ -891,14 +892,14 @@ calculate_sizes <- function(df) {
 
 ```{r}
 load_all()
-summarize_pkgs(LibPath)
+lib_summary(LibPath)
 check() # should throw notes about undefined globals
 ```
 
 ### 4 - add .data
 
 ```{r}
-summarize_pkgs <- function(by) {
+lib_summary <- function(by) {
   pkgs <- lib()
   
   pkgs <- calculate_sizes(pkgs)
