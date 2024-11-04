@@ -989,7 +989,7 @@ check()
 ```{r}
 lib_summary <- function(..., sizes = FALSE) {
   if (!is.logical(sizes)) {
-    cli::cli_abort("{.var sizes} should be a {.cls {class(TRUE)}} value, not {.obj_type_friendly {sizes}}")
+    cli::cli_abort("You supplied {.val {sizes}} to {.var sizes}. It should be a {.cls logical} value, not {.obj_type_friendly {sizes}}.")
   }
   
   lib() |> 
