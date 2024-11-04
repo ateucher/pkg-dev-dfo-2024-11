@@ -388,6 +388,50 @@ check()
 
 ***back to slides***
 
+### Workflow iteration
+
+Set keyboard shortcuts
+
+Micro:
+
+```{r}
+load_all() # shift cmd L
+```
+
+ - run expectations interactively
+
+Mezzo:
+
+ - run test file `test_active_file()`: cmd T
+ - report coverage of active file: cmd R
+
+Macro: (we already did)
+ - `test_package()`: shift cmd T
+ - report package coverage: shift cmd R
+ 
+**Back to Slides**
+
+Talk about what we would NOT want to snapshot
+
+Error is most obvious:
+
+```{r}
+test_that("lib_summary fails appropriately", {
+  expect_snapshot(lib_summary("foo"), error = TRUE)
+})
+```
+
+Maybe names?
+
+```{r}
+test_that("lib_summary returns expected results with defaults", {
+  res <- lib_summary()
+  expect_snapshot(names(res))
+})
+```
+
+**Back to slides**
+
 ## Dependencies
 
 ```{r}
