@@ -1027,6 +1027,12 @@ lib_summary(LibPath, License, sizes = "hello")
 lib_summary(LibPath, License, sizes = NULL)
 ```
 
+### update tests
+
+- snapshot for error
+- groups
+
+
 ## Releasing
 
 ```{r}
