@@ -2,8 +2,402 @@
 title: Using the tidyverse in your package 🧹
 ---
 
+## Tidyverse
 
+### Demo - not part of package
+
+Do in a new file eg scratch/tidyverse-testing.R and add scratch to Rbuildignore
+
+### data masking
 
 ```{r}
-library(dplyr)
+var_summary <- function(data, var) {
+  data |> 
+    summarise(
+      min = min(var),
+      max = max(var)
+    )
+}
+
+mtcars |> 
+  group_by(cyl) |> 
+  var_summary(mpg)
 ```
+
+Error: object mpg not found
+
+```{r}
+var_summary <- function(data, var) {
+  data |> 
+    summarise(
+      min = min({{ var }}),
+      max = max({{ var }})
+    )
+}
+
+mtcars |> 
+  group_by(cyl) |> 
+  var_summary(mpg)
+```
+
+```{r}
+big_cars_summary <- function(var) {
+  mtcars |> 
+    filter(.data$cyl >= 6) |> 
+    group_by(.data$cyl) |> 
+    summarise(
+      n = n(), 
+      mean = mean({{ var }}), 
+    )
+}
+
+big_cars_summary(disp)
+```
+
+### Your turn solution
+
+```{r}
+height_sum <- function(data, group_var) {
+  data |> 
+    dplyr::group_by({{ group_var }}) |> 
+    dplyr::summarise(
+      n = dplyr::n(),
+      mean_height = mean(.data$height)
+    )
+}
+
+height_sum(starwars, hair_color)
+```
+
+### Your turn solution
+
+```{r}
+height_sum <- function(data, ...) {
+  data |> 
+    dplyr::group_by(...) |> 
+    dplyr::summarise(
+      n = dplyr::n(),
+      mean_height = mean(.data$height)
+    )
+}
+
+height_sum(starwars, hair_color, eye_color)
+```
+
+### Dynamic dots
+
+```{r}
+var_summary <- function(data, var) {
+  data |> 
+    summarise(
+      "{{var}}_min" := min({{ var }})
+    )
+}
+
+mtcars |> 
+  group_by(cyl) |> 
+  var_summary(mpg)
+
+```
+
+### Your turn solution
+
+```{r}
+dynamic_sum <- function(data, group_var, sum_var) {
+  data |> 
+    dplyr::group_by({{ group_var }}) |> 
+    dplyr::summarise(
+      n = dplyr::n(),
+      "mean_{{sum_var}}" := mean({{ sum_var }})
+    )
+}
+
+dynamic_sum(starwars, hair_color, mass)
+```
+
+### tidyselect
+
+```{r}
+mtcars |>
+  dplyr::group_by(cyl) |>
+  dplyr::summarise(
+    dplyr::across(c("mpg", "disp"), mean)
+  )
+
+cols <- c("mpg", "disp", "xyz")
+mtcars |>
+  dplyr::group_by(cyl) |>
+  dplyr::summarise(
+    dplyr::across(dplyr::all_of(cols), mean)
+  )
+
+cols <- c("mpg", "disp", "xyz")
+mtcars |>
+  dplyr::group_by(cyl) |>
+  dplyr::summarise(
+    dplyr::across(dplyr::any_of(cols), mean)
+  )
+```
+
+Using a character vector:
+
+```{r}
+summy <- function(df, cols) {
+  df |> 
+    group_by(.data$cyl) |> 
+    summarise(
+      across(all_of(cols), .fns = mean)
+    )
+}
+```
+
+```{r}
+summy(mtcars, c("mpg", "disp"))
+```
+
+Using bare names or tidy-select helpers:
+
+```{r}
+summy <- function(df, cols) {
+  df |> 
+    group_by(.data$cyl) |> 
+    summarise(
+      across({{ cols }}, .fns = mean)
+    )
+}
+```
+
+```{r}
+summy(mtcars, c(mpg, disp))
+summy(mtcars, starts_with("mp"))
+summy(mtcars, where(is.numeric))
+```
+
+### Tidyversify libminer
+
+```{r}
+use_package("dplyr")
+```
+
+We are using the new base pipe, need R >= 4.1
+
+```{r}
+lib_summary <- function(by) {
+  pkgs <- lib()
+
+  dplyr::group_by(pkgs, by) |>
+    dplyr::count()
+}
+```
+
+```{r}
+load_all()
+lib_summary(LibPath)
+```
+
+**Errors - no column called 'by'**
+
+### 2a - use curly-curly with bare names
+
+```{r}
+lib_summary <- function(by) {
+  pkgs <- lib()
+
+  dplyr::group_by(pkgs, {{ by }}) |>
+    dplyr::count()
+}
+```
+
+```{r}
+load_all()
+lib_summary(LibPath)
+```
+
+### 2b - use .data[[x]] with character
+
+```{r}
+use_import_from("rlang", ".data")
+```
+
+```{r}
+lib_summary <- function(by) {
+  pkgs <- lib()
+
+  dplyr::group_by(pkgs, .data[[by]]) |>
+    dplyr::count()
+}
+```
+
+```{r}
+load_all()
+lib_summary("License")
+```
+
+### 3 - add sizes
+
+```{r}
+lib_summary <- function(by) {
+  pkgs <- lib()
+  
+  pkgs <- calculate_sizes(pkgs)
+  
+  dplyr::group_by(pkgs, {{by}}) |>
+    dplyr::summarise(
+      n = dplyr::n(), 
+      size = sum(size)
+    )
+}
+
+calculate_sizes <- function(df) {
+  df |> 
+    dplyr::mutate(
+      size = purrr::map_dbl(
+        fs::path(LibPath, Package),
+        \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+      )
+    )
+}
+```
+
+```{r}
+load_all()
+lib_summary(LibPath)
+check() # should throw notes about undefined globals
+```
+
+### 4 - add .data
+
+```{r}
+lib_summary <- function(by) {
+  pkgs <- lib()
+  
+  pkgs <- calculate_sizes(pkgs)
+  
+  dplyr::group_by(pkgs, {{by}}) |>
+    dplyr::summarise(
+      n = dplyr::n(), 
+      size = sum(.data$size)
+    )
+}
+
+calculate_sizes <- function(df) {
+  df |> 
+    dplyr::mutate(
+      size = purrr::map_dbl(
+        fs::path(.data$LibPath, .data$Package),
+        \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+      )
+    )
+}
+```
+
+### 5 use ... for multiple by's
+
+```{r}
+lib_summary <- function(...) {
+  lib() |> 
+    calculate_sizes() |> 
+    dplyr::group_by(...) |> 
+    dplyr::summarise(
+      n = dplyr::n(),
+      size = sum(.data$size)
+    )
+}
+```
+
+### Final - make sizes conditional again
+
+Also, drop groups so we don't get the message any more
+
+```{r}
+lib_summary <- function(..., sizes = FALSE) {
+  if (!is.logical(sizes)) {
+    stop("'sizes' must be logical (TRUE/FALSE).", call. = FALSE)
+  }
+  
+  lib() |> 
+    calculate_sizes(do_calc = sizes) |> 
+    dplyr::group_by(...) |> 
+    dplyr::summarise(
+      n = dplyr::n(),
+      dplyr::across(dplyr::any_of("size"), sum),
+      .groups = "drop"
+    )
+}
+
+calculate_sizes <- function(df, do_calc) {
+  if (!isTRUE(do_calc)) return(df)
+  
+  df |> 
+    dplyr::mutate(
+      size = purrr::map_dbl(
+        fs::path(.data$LibPath, .data$Package),
+        \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+      )
+    )
+}
+
+lib <- function() {
+  utils::installed.packages() |> 
+    dplyr::as_tibble()
+}
+
+lib_summary(LibPath, License)
+lib_summary(LibPath, License, sizes = TRUE)
+lib_summary(LibPath, License, sizes = 10)
+```
+
+```{r}
+test()
+# update tests
+check()
+# update documentation
+```
+
+## CLI
+
+### Final
+
+```{r}
+lib_summary <- function(..., sizes = FALSE) {
+  if (!is.logical(sizes)) {
+    cli::cli_abort("You supplied {.val {sizes}} to {.var sizes}. It should be a {.cls logical} value, not {.obj_type_friendly {sizes}}.")
+  }
+  
+  lib() |> 
+    calculate_sizes(do_calc = sizes) |> 
+    dplyr::group_by(...) |> 
+    dplyr::summarise(
+      n = dplyr::n(),
+      dplyr::across(dplyr::any_of("size"), sum),
+      .groups = "drop"
+    )
+}
+
+calculate_sizes <- function(df, do_calc) {
+  if (!isTRUE(do_calc)) return(df)
+  
+  cli::cli_inform(c("i" = "Calculating sizes..."))
+  
+  df |> 
+    dplyr::mutate(
+      size = purrr::map_dbl(
+        fs::path(.data$LibPath, .data$Package),
+        \(x) sum(fs::file_size(fs::dir_ls(x, recurse = TRUE)))
+      )
+    )
+}
+```
+
+```{r}
+lib_summary(LibPath, License)
+lib_summary(LibPath, License, sizes = TRUE)
+lib_summary(LibPath, License, sizes = 10)
+lib_summary(LibPath, License, sizes = "hello")
+lib_summary(LibPath, License, sizes = NULL)
+```
+
+### update tests
+
+- snapshot for error
+- groups
